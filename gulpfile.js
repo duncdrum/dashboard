@@ -4,7 +4,10 @@ import gulp from 'gulp';
 import exist from '@existdb/gulp-exist';
 import less from 'gulp-less';
 import LessAutoprefix from 'less-plugin-autoprefix';
+import zip from 'gulp-zip';
 import { promises as fs } from 'fs';
+import { readFileSync } from 'fs';
+import { XMLParser } from 'fast-xml-parser';
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -29,6 +32,24 @@ const html5TargetConfiguration = {
 const targetConfiguration = {
     target: '/db/apps/existdb-dashboard'
 };
+
+function getPackageInfo() {
+    const xmlContent = readFileSync('./expath-pkg.xml', 'utf-8');
+    const parser = new XMLParser({
+        ignoreAttributes: false,
+        attributeNamePrefix: '@_'
+    });
+    const result = parser.parse(xmlContent);
+    const pkg = result.expath.package;
+    return {
+        name: pkg['@_name'],
+        version: pkg['@_version'],
+        abbrev: pkg['@_abbrev']
+    };
+}
+
+const packageInfo = getPackageInfo();
+const xarName = `${packageInfo.abbrev || packageInfo.name}-${packageInfo.version}.xar`;
 
 gulp.task('clean', async function () {
     await fs.rm('build', { recursive: true, force: true });
@@ -97,6 +118,31 @@ gulp.task('deploy:other', function () {
 });
 
 gulp.task('deploy', gulp.parallel('deploy:other', 'deploy:components', 'deploy:styles'));
+
+// XAR creation //
+
+const buildFiles = [
+    '*.xml',
+    '*.xql',
+    '*.html',
+    'icon.png',
+    'icon.svg',
+    'modules/**/*',
+    'resources/**/*',
+    'templates/**/*',
+    'transforms/**/*'
+];
+
+gulp.task('xar', function () {
+    return gulp.src(buildFiles, {base: '.'})
+        .pipe(zip(xarName))
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('install', gulp.series('xar', function () {
+    return gulp.src(`build/${xarName}`)
+        .pipe(exClient.install());
+}));
 
 gulp.task('watch', function () {
     gulp.watch('resources/css/*', gulp.series('deploy:styles'));
