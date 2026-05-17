@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Build artifacts
+build/
+*.xar
+
+# IDE
+.idea/
+.zed/
+.cursor/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+
+# XQuery files with embedded HTML (parser limitation)
+admin.xql

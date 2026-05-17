@@ -1,17 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
     <title>eXist-db Dashboard</title>
-    <link rel="stylesheet" href="resources/styles.css"/>
-    <link rel="stylesheet" href="/node_modules/@awesome.me/webawesome/dist/styles/webawesome.css"/>
+    <link rel="stylesheet" href="resources/styles.css" />
+    <link rel="stylesheet" href="/node_modules/@awesome.me/webawesome/dist/styles/webawesome.css" />
     <script type="module" src="existdb-dashboard.js"></script>
     <script type="module" src="bower_components/existdb-launcher/existdb-launcher.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <existdb-launcher-app ignores='["packagemanager","packageservice","launcher","usermanager","dashboard"]'>
-        <existdb-login login-label="Login" logout-label="Logout" group="dba" login-url="admin#" logout-url="index.html"></existdb-login>
+      <existdb-login
+        login-label="Login"
+        logout-label="Logout"
+        group="dba"
+        login-url="admin#"
+        logout-url="index.html"
+      ></existdb-login>
     </existdb-launcher-app>
-</body>
+  </body>
 </html>

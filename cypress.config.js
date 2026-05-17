@@ -11,10 +11,10 @@ export default defineConfig({
     defaultCommandTimeout: 10000,
     retries: {
       runMode: 2,
-      openMode: 0
+      openMode: 0,
     },
     setupNodeEvents(on, config) {
       return config;
-    }
-  }
+    },
+  },
 });

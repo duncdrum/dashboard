@@ -15,7 +15,7 @@ class ExistdbDashboard extends LitElement {
   static properties = {
     path: { type: String },
     currentPage: { state: true },
-    componentLoaded: { state: true }
+    componentLoaded: { state: true },
   };
 
   constructor() {
@@ -150,13 +150,13 @@ class ExistdbDashboard extends LitElement {
     return html`
       <wa-drawer label="Dashboard" placement="start" class="drawer-placement-start">
         <div slot="label" class="drawer-header">
-          <img src="resources/images/existdb-web.svg" alt="eXist-db">
+          <img src="resources/images/existdb-web.svg" alt="eXist-db" />
           <div class="subitem">Dashboard</div>
         </div>
 
         <wa-menu>
           <wa-menu-item @click=${() => this._navigateTo('launcher')}>
-            <img slot="start" class="menu-icon" src="resources/images/launcher.svg" alt="">
+            <img slot="start" class="menu-icon" src="resources/images/launcher.svg" alt="" />
             Launcher
           </wa-menu-item>
           <wa-menu-item @click=${() => this._navigateTo('packagemanager')}>
@@ -176,7 +176,7 @@ class ExistdbDashboard extends LitElement {
             Settings
           </wa-menu-item>
           <wa-menu-item @click=${this._logout}>
-            <img slot="start" class="menu-icon" src="resources/images/logout.svg" alt="">
+            <img slot="start" class="menu-icon" src="resources/images/logout.svg" alt="" />
             Logout
           </wa-menu-item>
         </wa-menu>
@@ -189,9 +189,7 @@ class ExistdbDashboard extends LitElement {
         <h1>eXist-db Dashboard</h1>
       </div>
 
-      <div class="content-area">
-        ${this._renderPage()}
-      </div>
+      <div class="content-area">${this._renderPage()}</div>
     `;
   }
 
@@ -207,9 +205,10 @@ class ExistdbDashboard extends LitElement {
     switch (this.currentPage) {
       case 'launcher':
         return html`
-          <existdb-launcher-app 
+          <existdb-launcher-app
             ignores='["packagemanager","packageservice","launcher","usermanager","dashboard"]'
-            show-branding="false">
+            show-branding="false"
+          >
           </existdb-launcher-app>
         `;
       case 'packagemanager':

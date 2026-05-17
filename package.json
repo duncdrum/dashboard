@@ -2,29 +2,31 @@
   "name": "existdb-dashboard",
   "version": "2.0.0",
   "description": "Modern eXist-db Admin Dashboard",
-  "type": "module",
-  "main": "index.html",
-  "engines": {
-    "node": ">=24.0.0"
-  },
-  "scripts": {
-    "clean": "rm -rf build",
-    "build": "gulp clean && gulp deploy",
-    "build:production": "gulp clean && NODE_ENV=production gulp deploy",
-    "deploy": "gulp deploy",
-    "watch": "gulp watch",
-    "start": "gulp",
-    "xar": "gulp xar",
-    "install:xar": "gulp install",
-    "cypress": "cypress run",
-    "cypress:open": "cypress open"
-  },
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eXist-db/dashboard.git"
   },
   "author": "",
-  "license": "ISC",
+  "main": "index.html",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "gulp clean && gulp deploy",
+    "build:production": "gulp clean && NODE_ENV=production gulp deploy",
+    "clean": "rm -rf build",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open",
+    "deploy": "gulp deploy",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "install:xar": "gulp install",
+    "start": "gulp",
+    "watch": "gulp watch",
+    "xar": "gulp xar"
+  },
   "dependencies": {
     "@awesome.me/webawesome": "^3.7.0",
     "lit": "^3.2.1"
@@ -36,6 +38,9 @@
     "fast-xml-parser": "^5.8.0",
     "gulp": "^5.0.0",
     "gulp-watch": "^5.0.1",
-    "gulp-zip": "^6.1.0"
+    "gulp-zip": "^6.1.0",
+    "prettier": "3.8.3",
+    "prettier-plugin-package": "2.0.0",
+    "prettier-plugin-xquery": "1.6.0"
   }
 }
