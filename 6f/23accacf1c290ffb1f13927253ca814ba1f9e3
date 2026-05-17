@@ -1,0 +1,26 @@
+gulpfile.js
+  s_ed5a838a6b43f4::t_06db3ece91cfbc 94-97
+  s_ed5a838a6b43f4::t_8a42075c997439 131-132
+admin.xql
+  s_ed5a838a6b43f4::t_31b3b1c27c0dfe 10,15,17-22,25
+existdb-dashboard.js
+  s_ed5a838a6b43f4::t_670f7848a70dbc 1-249
+index.html
+  s_ed5a838a6b43f4::t_5b64856bd2cb73 1-2,6,8-10,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "6f23accacf1c290ffb1f13927253ca814ba1f9e3",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
