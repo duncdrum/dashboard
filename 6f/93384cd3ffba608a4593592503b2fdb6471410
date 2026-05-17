@@ -1,0 +1,22 @@
+gulpfile.js
+  s_ed5a838a6b43f4::t_92f9b1be51c79f 7,9-10,36-53,122-145
+package.json
+  s_ed5a838a6b43f4::t_aa7235e986dc33 40
+  s_ed5a838a6b43f4::t_d03dfeeacfdc85 17-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "6f93384cd3ffba608a4593592503b2fdb6471410",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
