@@ -1,0 +1,29 @@
+cypress/e2e/dashboard.cy.js
+  s_ed5a838a6b43f4::t_dd7f6d71d6e58e 21,30,39,48,57
+existdb-dashboard.js
+  s_ed5a838a6b43f4::t_b8444392ee1a45 151,157-159,161-163,165-167,169-171,173-175,177-179,181-183,186-188
+  s_ed5a838a6b43f4::t_1ba048293b4746 142
+  s_ed5a838a6b43f4::t_13b0b1e5c63a8e 103,107
+  s_ed5a838a6b43f4::t_fa1102a8cb05b1 70
+  s_ed5a838a6b43f4::t_cd735a17dc819e 225,228
+  s_ed5a838a6b43f4::t_afcb25341e3ccc 58
+  s_ed5a838a6b43f4::t_274552a813fe79 36-37
+  s_ed5a838a6b43f4::t_f63080aeb89f9b 73-74,77,81
+  s_ed5a838a6b43f4::t_e8dab013a27fd4 202
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "c785168337e43239be29e0a9e2a4d763257d9221",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
