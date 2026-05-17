@@ -130,26 +130,9 @@ class ExistdbDashboard extends LitElement {
   }
 
   _loadComponent(page) {
-    if (this.componentLoaded[page]) return;
-
-    const componentMap = {
-      'launcher': { tag: 'existdb-launcher-app', src: 'bower_components/existdb-launcher/existdb-launcher.js' },
-      'packagemanager': { tag: 'existdb-packagemanager', src: 'bower_components/existdb-packagemanager/existdb-packagemanager.js' },
-      'usermanager': { tag: 'existdb-usermanager-app', src: 'bower_components/existdb-usermanager/existdb-usermanager.js' },
-      'backup': { tag: 'existdb-backup-app', src: 'bower_components/existdb-backup/existdb-backup.js' },
-      'settings': { tag: 'existdb-settings', src: 'existdb-settings.js' }
-    };
-
-    const component = componentMap[page];
-    if (component && !customElements.get(component.tag)) {
-      import(component.src).then(() => {
-        this.componentLoaded = { ...this.componentLoaded, [page]: true };
-      }).catch(err => {
-        console.error(`Failed to load component: ${page}`, err);
-      });
-    } else {
-      this.componentLoaded = { ...this.componentLoaded, [page]: true };
-    }
+    // Sub-components are loaded via HTML imports in admin.xql
+    // Mark them as loaded immediately
+    this.componentLoaded = { ...this.componentLoaded, [page]: true };
   }
 
   _navigateTo(page) {

@@ -15,11 +15,16 @@ return
     <title>eXist-db Admin Dashboard</title>
     <link rel="stylesheet" href="resources/styles.css"/>
     <link rel="stylesheet" href="/node_modules/@shoelace-style/shoelace/dist/themes/light.css"/>
+    
+    <!-- Shoelace and Lit for main dashboard shell -->
     <script type="module" src="existdb-dashboard.js"></script>
-    <script type="module" src="bower_components/existdb-launcher/existdb-launcher.js"></script>
-    <script type="module" src="bower_components/existdb-packagemanager/existdb-packagemanager.js"></script>
-    <script type="module" src="bower_components/existdb-usermanager/existdb-usermanager.js"></script>
-    <script type="module" src="bower_components/existdb-backup/existdb-backup.js"></script>
+    
+    <!-- Polymer loader for sub-components (to be migrated separately) -->
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="bower_components/existdb-launcher/dependencies.html"/>
+    <link rel="import" href="bower_components/existdb-packagemanager/dependencies.html"/>
+    <link rel="import" href="bower_components/existdb-usermanager/dependencies.html"/>
+    <link rel="import" href="bower_components/existdb-backup/dependencies.html"/>
 </head>
 <body>
     <existdb-dashboard path="{$route}"></existdb-dashboard>
