@@ -26,16 +26,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit": "^3.2.1",
-    "@awesome.me/webawesome": "^3.7.0"
+    "@awesome.me/webawesome": "^3.7.0",
+    "lit": "^3.2.1"
   },
   "devDependencies": {
-    "gulp": "^5.0.0",
+    "@existdb/gulp-exist": "^6.0.0",
+    "chai": "^6.2.2",
     "cypress": "^15.15.0",
-    "chai": "^5.2.0",
-    "@existdb/gulp-exist": "^4.4.0",
+    "fast-xml-parser": "^5.8.0",
+    "gulp": "^5.0.0",
     "gulp-watch": "^5.0.1",
-    "gulp-zip": "^6.1.0",
-    "fast-xml-parser": "^4.3.6"
+    "gulp-zip": "^6.1.0"
   }
 }

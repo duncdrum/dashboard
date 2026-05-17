@@ -1,7 +1,7 @@
 'use strict';
 
 import gulp from 'gulp';
-import exist from '@existdb/gulp-exist';
+import { createClient } from '@existdb/gulp-exist';
 import zip from 'gulp-zip';
 import { promises as fs, existsSync } from 'fs';
 import { readFileSync } from 'fs';
@@ -11,10 +11,7 @@ const PRODUCTION = process.env.NODE_ENV === 'production';
 
 console.log('Production? %s', PRODUCTION);
 
-// exist.defineMimeTypes is called automatically by @existdb/gulp-exist
-// No need to define it manually
-
-const exClient = exist.createClient({
+const exClient = createClient({
     host: 'localhost',
     port: '8080',
     path: '/exist/xmlrpc',
