@@ -1,0 +1,21 @@
+.github/dependabot.yml
+  s_ed5a838a6b43f4::t_0f773481e1e00b 3-14
+.github/workflows/ci.yml
+  s_ed5a838a6b43f4::t_574a0d18a8c8a6 1-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "f3e31c92a1cdd9e9f8bc8c2df6e7337578523396",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
