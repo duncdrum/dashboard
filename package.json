@@ -8,6 +8,13 @@
     "node": ">=20.0.0"
   },
   "scripts": {
+    "clean": "rm -rf build",
+    "build": "gulp clean && gulp deploy",
+    "build:production": "gulp clean && NODE_ENV=production gulp deploy",
+    "deploy": "gulp deploy",
+    "watch": "gulp watch",
+    "start": "gulp",
+    "xar": "node scripts/create-xar.js",
     "cypress": "cypress run",
     "cypress:open": "cypress open"
   },
@@ -24,6 +31,8 @@
     "less": "^4.2.0",
     "less-plugin-autoprefix": "^2.0.0",
     "@existdb/gulp-exist": "^4.4.0",
-    "gulp-watch": "^5.0.1"
+    "gulp-watch": "^5.0.1",
+    "archiver": "^7.0.1",
+    "fast-xml-parser": "^4.3.6"
   }
 }
