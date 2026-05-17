@@ -1,0 +1,33 @@
+package.json
+  s_ed5a838a6b43f4::t_79855e21f4d46b 8
+  s_ed5a838a6b43f4::t_add8408619048e 18
+.node-version
+  s_ed5a838a6b43f4::t_f8341c077f6adb 1
+.nvmrc
+  s_ed5a838a6b43f4::t_16a4316b7ff6c3 1
+gulpfile.js
+  s_ed5a838a6b43f4::t_a29638045850c7 108,146
+  s_ed5a838a6b43f4::t_7d46a27ce12974 95-101
+  s_ed5a838a6b43f4::t_97c9fc4d2e7474 6
+  s_ed5a838a6b43f4::t_42e3d5cac1ab1a 122,125-130
+  s_ed5a838a6b43f4::t_b121a9b7cfa4a7 14-15
+  s_ed5a838a6b43f4::t_254f397492b77a 37-38,41
+README.md
+  s_ed5a838a6b43f4::t_e28c28104340bb 7-8,29,77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "8807d498e64eeb8213d4b98b7810b64a3a80836d",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
