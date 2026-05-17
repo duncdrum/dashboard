@@ -1,0 +1,23 @@
+existdb-dashboard.js
+  s_ed5a838a6b43f4::t_dd18e9f0ee72eb 133-135
+admin.xql
+  s_ed5a838a6b43f4::t_c3de08f5455109 18-19,21
+  s_ed5a838a6b43f4::t_fea92c722ad521 22-23
+  s_ed5a838a6b43f4::t_0cbca4de79869c 24-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "e117ec266fe1a57c4733c9c5d5da36bc004ee038",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
