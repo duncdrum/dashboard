@@ -1,0 +1,19 @@
+README.md
+  s_ed5a838a6b43f4::t_09d3951ae46498 3,5,7-8,10,12-15,17,19-22,24,26,28-31,35,37-40,42,44,46-49,51,53-59,61,63,65-70,72,74,76-80,82,84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "d6a6b79fd2e67b4cd75f32c4a09b27fc8b6b151b",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
