@@ -1,0 +1,23 @@
+scripts/create-xar.js
+  s_ed5a838a6b43f4::t_0a6e9838e36873 3-14,16-89
+  s_ed5a838a6b43f4::t_8fb6516658725c 1-2,15
+package.json
+  s_ed5a838a6b43f4::t_e66ed0ec052fec 11-17
+  s_ed5a838a6b43f4::t_d8f2a1223c94ef 34-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "9d7a906749b0656b59d09726b3b2a528ff43cdd4",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
