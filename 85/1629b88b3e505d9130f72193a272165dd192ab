@@ -1,0 +1,19 @@
+gulpfile.js
+  s_ed5a838a6b43f4::t_ef054d9a4369e4 3-7,9,11,15,17,22,24,27,29,31,33-34,39-40,45-46,48,51-52,56-57,61-62,65-66,70,79-80,82,96-97,99,102-105,107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "851629b88b3e505d9130f72193a272165dd192ab",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
