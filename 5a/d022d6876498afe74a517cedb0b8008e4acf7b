@@ -1,0 +1,23 @@
+package.json
+  s_ed5a838a6b43f4::t_adf18d0a7e90cd 2-5,7-9,11-12,21-25,27
+.nvmrc
+  s_ed5a838a6b43f4::t_7e8513ad7f96df 1
+.node-version
+  s_ed5a838a6b43f4::t_adbc9cb6d82578 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "5ad022d6876498afe74a517cedb0b8008e4acf7b",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
