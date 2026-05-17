@@ -2,10 +2,8 @@
 
 import gulp from 'gulp';
 import exist from '@existdb/gulp-exist';
-import less from 'gulp-less';
-import LessAutoprefix from 'less-plugin-autoprefix';
 import zip from 'gulp-zip';
-import { promises as fs } from 'fs';
+import { promises as fs, existsSync } from 'fs';
 import { readFileSync } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 
@@ -13,9 +11,8 @@ const PRODUCTION = process.env.NODE_ENV === 'production';
 
 console.log('Production? %s', PRODUCTION);
 
-exist.defineMimeTypes({
-    'application/xml': ['odd']
-});
+// exist.defineMimeTypes is called automatically by @existdb/gulp-exist
+// No need to define it manually
 
 const exClient = exist.createClient({
     host: 'localhost',
@@ -37,10 +34,11 @@ function getPackageInfo() {
     const xmlContent = readFileSync('./expath-pkg.xml', 'utf-8');
     const parser = new XMLParser({
         ignoreAttributes: false,
-        attributeNamePrefix: '@_'
+        attributeNamePrefix: '@_',
+        removeNSPrefix: true
     });
     const result = parser.parse(xmlContent);
-    const pkg = result.expath.package;
+    const pkg = result.package;
     return {
         name: pkg['@_name'],
         version: pkg['@_version'],
@@ -54,23 +52,6 @@ const xarName = `${packageInfo.abbrev || packageInfo.name}-${packageInfo.version
 gulp.task('clean', async function () {
     await fs.rm('build', { recursive: true, force: true });
 });
-
-// styles //
-
-const lessPath = './resources/css/style.less';
-const autoprefix = new LessAutoprefix({browsers: ['last 2 versions']});
-
-gulp.task('styles', function () {
-    return gulp.src(lessPath)
-        .pipe(less({plugins: [autoprefix]}))
-        .pipe(gulp.dest('./resources/css'));
-});
-
-gulp.task('deploy:styles', gulp.series('styles', function () {
-    return gulp.src('resources/css/*.css', {base: './'})
-        .pipe(exClient.newer(targetConfiguration))
-        .pipe(exClient.dest(targetConfiguration));
-}));
 
 // odd files //
 
@@ -106,13 +87,17 @@ gulp.task('deploy:components', function () {
 const otherPaths = [
     '*.html',
     '*.xql',
-    'templates/**/*',
-    'transforms/**/*',
     'resources/**/*',
-    '!resources/css/*',
     'modules/**/*',
     'demo/*.html'
 ];
+
+if (existsSync('templates')) {
+    otherPaths.push('templates/**/*');
+}
+if (existsSync('transforms')) {
+    otherPaths.push('transforms/**/*');
+}
 
 gulp.task('deploy:other', function () {
     return gulp.src(otherPaths, {base: './'})
@@ -120,7 +105,7 @@ gulp.task('deploy:other', function () {
         .pipe(exClient.dest(targetConfiguration));
 });
 
-gulp.task('deploy', gulp.parallel('deploy:other', 'deploy:components', 'deploy:styles'));
+gulp.task('deploy', gulp.parallel('deploy:other', 'deploy:components'));
 
 // XAR creation //
 
@@ -134,9 +119,15 @@ const buildFiles = [
     'icon.svg',
     'modules/**/*',
     'resources/**/*',
-    'templates/**/*',
-    'transforms/**/*'
+    'demo/*.html'
 ];
+
+if (existsSync('templates')) {
+    buildFiles.push('templates/**/*');
+}
+if (existsSync('transforms')) {
+    buildFiles.push('transforms/**/*');
+}
 
 gulp.task('xar', function () {
     return gulp.src(buildFiles, {base: '.'})
@@ -150,9 +141,9 @@ gulp.task('install', gulp.series('xar', function () {
 }));
 
 gulp.task('watch', function () {
-    gulp.watch('resources/css/*', gulp.series('deploy:styles'));
     gulp.watch(otherPaths, gulp.series('deploy:other'));
     gulp.watch('*.html', gulp.series('deploy:components'));
+    gulp.watch('*.js', gulp.series('deploy:components'));
 });
 
 gulp.task('default', gulp.series('watch'));

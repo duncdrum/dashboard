@@ -4,8 +4,8 @@ Modern admin dashboard for eXist-db built with Lit and Shoelace.
 
 ## Requirements
 
-- Node.js 20+
-- npm 9+
+- Node.js 22+
+- npm 10+
 
 ## Development
 
@@ -26,7 +26,7 @@ The XAR file will be created in the `build/` directory and can be installed via 
 ## Testing
 
 ```bash
-npm test              # Run tests in headless mode
+npm run cypress              # Run tests in headless mode
 npm run cypress:open  # Open Cypress GUI
 ```
 
@@ -69,14 +69,12 @@ This is a complete rewrite from the Polymer 2 + Bower stack. Key changes:
 - **Ant → npm scripts**: Simplified build process
 - **Custom Shadow DOM helpers → Cypress native**: Better testing support
 
-See `.zed/plans/MIGRATION-PLAN.md` for detailed migration information.
-
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Run tests: `npm test`
+4. Run tests: `npm run cypress`
 5. Submit a pull request
 
 ## License
