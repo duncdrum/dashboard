@@ -91,7 +91,10 @@ gulp.task('odd:watch', function () {
 const componentPaths = [
     '*.html',
     '!index.html',
-    'bower_components/**/*'
+    '*.js',
+    '!gulpfile.js',
+    'node_modules/@shoelace-style/shoelace/dist/**/*.js',
+    'bower_components/**/*.js'
 ];
 
 gulp.task('deploy:components', function () {
@@ -125,6 +128,8 @@ const buildFiles = [
     '*.xml',
     '*.xql',
     '*.html',
+    '*.js',
+    '!gulpfile.js',
     'icon.png',
     'icon.svg',
     'modules/**/*',
