@@ -1,7 +1,9 @@
 node_modules/
+bower_components/
 build/
 .idea/
 .zed/
 .cursor/
 cypress/screenshots/
 cypress/videos/
+*.xar
