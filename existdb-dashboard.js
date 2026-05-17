@@ -33,8 +33,8 @@ class ExistdbDashboard extends LitElement {
       height: 100vh;
       margin: 0;
       padding: 0;
-      font-family: var(--sl-font-sans);
-      color: var(--sl-color-neutral-900);
+      font-family: var(--wa-font-sans);
+      color: var(--wa-color-neutral-900);
     }
 
     .header {
@@ -55,7 +55,7 @@ class ExistdbDashboard extends LitElement {
     .drawer-header {
       text-align: center;
       padding: 2rem 1rem;
-      border-bottom: 1px solid var(--sl-color-neutral-200);
+      border-bottom: 1px solid var(--wa-color-neutral-200);
     }
 
     .drawer-header img {
@@ -67,18 +67,18 @@ class ExistdbDashboard extends LitElement {
       font-weight: 300;
       font-size: larger;
       letter-spacing: 4.5px;
-      color: var(--sl-color-neutral-600);
+      color: var(--wa-color-neutral-600);
     }
 
-    sl-menu {
-      --sl-spacing-medium: 0;
+    wa-menu {
+      --wa-spacing-medium: 0;
     }
 
-    sl-menu-item {
+    wa-menu-item {
       --padding: 0.75rem 1rem;
     }
 
-    sl-menu-item::part(base) {
+    wa-menu-item::part(base) {
       padding: var(--padding);
     }
 
@@ -100,11 +100,11 @@ class ExistdbDashboard extends LitElement {
       height: 100%;
     }
 
-    sl-drawer::part(panel) {
+    wa-drawer::part(panel) {
       width: 256px;
     }
 
-    sl-drawer::part(body) {
+    wa-drawer::part(body) {
       padding: 0;
     }
   `;
@@ -139,7 +139,7 @@ class ExistdbDashboard extends LitElement {
     this.currentPage = page;
     window.location.hash = `/${page}`;
     this._loadComponent(page);
-    this.shadowRoot.querySelector('sl-drawer').hide();
+    this.shadowRoot.querySelector('wa-drawer').hide();
   }
 
   _logout() {
@@ -148,42 +148,44 @@ class ExistdbDashboard extends LitElement {
 
   render() {
     return html`
-      <sl-drawer label="Dashboard" placement="start" class="drawer-placement-start">
+      <wa-drawer label="Dashboard" placement="start" class="drawer-placement-start">
         <div slot="label" class="drawer-header">
           <img src="resources/images/existdb-web.svg" alt="eXist-db">
           <div class="subitem">Dashboard</div>
         </div>
 
-        <sl-menu>
-          <sl-menu-item @click=${() => this._navigateTo('launcher')}>
-            <img slot="prefix" class="menu-icon" src="resources/images/launcher.svg" alt="">
+        <wa-menu>
+          <wa-menu-item @click=${() => this._navigateTo('launcher')}>
+            <img slot="start" class="menu-icon" src="resources/images/launcher.svg" alt="">
             Launcher
-          </sl-menu-item>
-          <sl-menu-item @click=${() => this._navigateTo('packagemanager')}>
-            <sl-icon slot="prefix" name="grid-fill"></sl-icon>
+          </wa-menu-item>
+          <wa-menu-item @click=${() => this._navigateTo('packagemanager')}>
+            <wa-icon slot="start" name="grid-fill"></wa-icon>
             Package Manager
-          </sl-menu-item>
-          <sl-menu-item @click=${() => this._navigateTo('usermanager')}>
-            <sl-icon slot="prefix" name="people-fill"></sl-icon>
+          </wa-menu-item>
+          <wa-menu-item @click=${() => this._navigateTo('usermanager')}>
+            <wa-icon slot="start" name="people-fill"></wa-icon>
             User Manager
-          </sl-menu-item>
-          <sl-menu-item @click=${() => this._navigateTo('backup')}>
-            <sl-icon slot="prefix" name="arrow-clockwise"></sl-icon>
+          </wa-menu-item>
+          <wa-menu-item @click=${() => this._navigateTo('backup')}>
+            <wa-icon slot="start" name="arrow-clockwise"></wa-icon>
             Backup
-          </sl-menu-item>
-          <sl-menu-item @click=${() => this._navigateTo('settings')}>
-            <sl-icon slot="prefix" name="gear-fill"></sl-icon>
+          </wa-menu-item>
+          <wa-menu-item @click=${() => this._navigateTo('settings')}>
+            <wa-icon slot="start" name="gear-fill"></wa-icon>
             Settings
-          </sl-menu-item>
-          <sl-menu-item @click=${this._logout}>
-            <img slot="prefix" class="menu-icon" src="resources/images/logout.svg" alt="">
+          </wa-menu-item>
+          <wa-menu-item @click=${this._logout}>
+            <img slot="start" class="menu-icon" src="resources/images/logout.svg" alt="">
             Logout
-          </sl-menu-item>
-        </sl-menu>
-      </sl-drawer>
+          </wa-menu-item>
+        </wa-menu>
+      </wa-drawer>
 
       <div class="header">
-        <sl-icon-button name="list" label="Menu" @click=${() => this.shadowRoot.querySelector('sl-drawer').show()}></sl-icon-button>
+        <wa-button @click=${() => this.shadowRoot.querySelector('wa-drawer').show()}>
+          <wa-icon name="list"></wa-icon>
+        </wa-button>
         <h1>eXist-db Dashboard</h1>
       </div>
 
@@ -197,7 +199,7 @@ class ExistdbDashboard extends LitElement {
     if (!this.componentLoaded[this.currentPage]) {
       return html`
         <div class="loading">
-          <sl-spinner style="font-size: 3rem;"></sl-spinner>
+          <wa-spinner style="font-size: 3rem;"></wa-spinner>
         </div>
       `;
     }
@@ -220,10 +222,10 @@ class ExistdbDashboard extends LitElement {
         return html`<existdb-settings></existdb-settings>`;
       default:
         return html`
-          <sl-card>
+          <wa-card>
             <div slot="header">Page Not Found</div>
             <p>The page "${this.currentPage}" does not exist.</p>
-          </sl-card>
+          </wa-card>
         `;
     }
   }

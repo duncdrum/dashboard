@@ -18,7 +18,7 @@ describe('The dashboard', function() {
     it('should enable package manager', function() {
       cy
         .get('body')
-        .find('sl-menu-item', { includeShadowDom: true })
+        .find('wa-dropdown-item', { includeShadowDom: true })
         .contains('Package Manager')
         .click()
         .url().should('include', 'dashboard/admin#/packagemanager');
@@ -27,7 +27,7 @@ describe('The dashboard', function() {
     it('should enable user manager', function() {
       cy
         .get('body')
-        .find('sl-menu-item', { includeShadowDom: true })
+        .find('wa-dropdown-item', { includeShadowDom: true })
         .contains('User Manager')
         .click()
         .url().should('include', 'dashboard/admin#/usermanager');
@@ -36,7 +36,7 @@ describe('The dashboard', function() {
     it('should enable backup', function() {
       cy
         .get('body')
-        .find('sl-menu-item', { includeShadowDom: true })
+        .find('wa-dropdown-item', { includeShadowDom: true })
         .contains('Backup')
         .click()
         .url().should('include', 'dashboard/admin#/backup');
@@ -45,7 +45,7 @@ describe('The dashboard', function() {
     it('should enable settings', function() {
       cy
         .get('body')
-        .find('sl-menu-item', { includeShadowDom: true })
+        .find('wa-dropdown-item', { includeShadowDom: true })
         .contains('Settings')
         .click()
         .url().should('include', 'dashboard/admin#/settings');
@@ -54,7 +54,7 @@ describe('The dashboard', function() {
     after(function() {
       cy
         .get('body')
-        .find('sl-menu-item', { includeShadowDom: true })
+        .find('wa-dropdown-item', { includeShadowDom: true })
         .contains('Logout')
         .click()
         .url().should('include', 'dashboard/index.html?logout=true');
