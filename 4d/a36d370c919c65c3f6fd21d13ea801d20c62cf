@@ -1,0 +1,21 @@
+cypress.config.js
+  s_ed5a838a6b43f4::t_e28098197ab00b 1-20
+cypress/support/index.js
+  s_ed5a838a6b43f4::t_07eb199b64f5f2 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "4da36d370c919c65c3f6fd21d13ea801d20c62cf",
+  "prompts": {},
+  "sessions": {
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
