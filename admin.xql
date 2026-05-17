@@ -14,7 +14,7 @@ return
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"/>
     <title>eXist-db Admin Dashboard</title>
     <link rel="stylesheet" href="resources/styles.css"/>
-    <link rel="stylesheet" href="/node_modules/@shoelace-style/shoelace/dist/themes/light.css"/>
+    <link rel="stylesheet" href="/node_modules/@awesome.me/webawesome/dist/styles/webawesome.css"/>
     
     <!-- Shoelace and Lit for main dashboard shell -->
     <script type="module" src="existdb-dashboard.js"></script>

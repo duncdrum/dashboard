@@ -74,7 +74,7 @@ const componentPaths = [
     '!index.html',
     '*.js',
     '!gulpfile.js',
-    'node_modules/@shoelace-style/shoelace/dist/**/*.js',
+    'node_modules/@awesome.me/webawesome/dist/**/*.js',
     'bower_components/**/*.js'
 ];
 

@@ -1,15 +1,15 @@
 import { LitElement, html, css } from 'lit';
-import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
-import '@shoelace-style/shoelace/dist/components/menu/menu.js';
-import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
-import '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js';
-import '@shoelace-style/shoelace/dist/components/spinner/spinner.js';
-import '@shoelace-style/shoelace/dist/components/card/card.js';
-import '@shoelace-style/shoelace/dist/components/alert/alert.js';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+import '@awesome.me/webawesome/dist/components/drawer/drawer.js';
+import '@awesome.me/webawesome/dist/components/menu/menu.js';
+import '@awesome.me/webawesome/dist/components/menu-item/menu-item.js';
+import '@awesome.me/webawesome/dist/components/icon/icon.js';
+import '@awesome.me/webawesome/dist/components/icon-button/icon-button.js';
+import '@awesome.me/webawesome/dist/components/spinner/spinner.js';
+import '@awesome.me/webawesome/dist/components/card/card.js';
+import '@awesome.me/webawesome/dist/components/alert/alert.js';
+import { setBasePath } from '@awesome.me/webawesome/dist/webawesome.js';
 
-setBasePath('/node_modules/@shoelace-style/shoelace/dist/');
+setBasePath('/node_modules/@awesome.me/webawesome/dist/');
 
 class ExistdbDashboard extends LitElement {
   static properties = {
