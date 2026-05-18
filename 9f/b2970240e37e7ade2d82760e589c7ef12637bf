@@ -1,0 +1,74 @@
+admin.xql
+  s_8b02c97966fa58::t_c4d825d35757cb 11,16,18-32
+demo/index.html
+  s_8b02c97966fa58::t_67b1010e78825c 7-19,22
+resources/styles/webawesome.css
+  s_8b02c97966fa58::t_aa7b90c08a3dd2 1-2
+existdb-dashboard.js
+  s_8b02c97966fa58::t_6267adc5698a5f 2
+  s_ed5a838a6b43f4::t_56e9ea36ba4d1b 14
+  s_ed5a838a6b43f4::t_3da0468dcfe065 11,93
+cypress/e2e/dashboard.cy.js
+  s_8b02c97966fa58::t_e4c6254e57fbd7 25
+  s_ed5a838a6b43f4::t_47fab7fc6ad6e4 4,9-10,13-21,23-24,28-31,33-34,38-41,43-44,48-51,53-54,59
+  s_8b02c97966fa58::t_e5477fb07c3e58 35,45,55
+gulpfile.js
+  s_8b02c97966fa58::t_f21b5240eec797 53,55-60,62-79,90,92
+  s_ed5a838a6b43f4::t_7d407ee272269d 17
+  s_ed5a838a6b43f4::t_2f19becb25b980 95-107,109-122,172-173
+  s_ed5a838a6b43f4::t_044b33ff6b503a 154
+  s_ed5a838a6b43f4::t_b548ee6deeccfd 179
+  s_8b02c97966fa58::t_70a089032f945c 54,81-89,91,123-126,143-144,185
+  s_ed5a838a6b43f4::t_efc4738ba647e8 6,80,93-94,174
+  s_ed5a838a6b43f4::t_40b10d4c7775a9 61
+  s_8b02c97966fa58::t_9ad7943987bfb2 108
+.gitignore
+  s_8b02c97966fa58::t_a57e8db5808c34 3,11
+index.html
+  s_ed5a838a6b43f4::t_3ec2e48521490a 9-11,16-18
+  s_8b02c97966fa58::t_a315dd5392faf2 7,14-15,19-20
+  s_ed5a838a6b43f4::t_38eb5ea05e9dad 12-13
+guest.html
+  s_8b02c97966fa58::t_fda65921c93f4a 1-2,6-7,9-19
+README.md
+  s_8b02c97966fa58::t_2d456a290f24ec 3,9,13-14,20-21,28,33-34,37,39,41-44,46,48-52,54,56
+demo/settings.html
+  s_8b02c97966fa58::t_ebee9ad0d5da9e 1,7-18,21
+package.json
+  s_8b02c97966fa58::t_1a7abc547efba5 3
+  s_ed5a838a6b43f4::t_04c7f1dfd46741 47
+  s_8b02c97966fa58::t_cda966bc9da6f9 17-18,34-38
+.existdb.json
+  s_ed5a838a6b43f4::t_b7fd95c10fe32d 1-4,6-13
+  s_ed5a838a6b43f4::t_928156374588a1 5
+src/existdb-settings.js
+  s_8b02c97966fa58::t_3b6468cbc33464 1-14,16-26
+scripts/ensure-component-builds.mjs
+  s_8b02c97966fa58::t_e14a2853761bc2 1-22
+resources/importmap.json
+  s_8b02c97966fa58::t_38ee893c66031f 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "9fb2970240e37e7ade2d82760e589c7ef12637bf",
+  "prompts": {},
+  "sessions": {
+    "s_8b02c97966fa58": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "643cba35-b53a-4abb-bc41-fda94401461c",
+        "model": "default"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    },
+    "s_ed5a838a6b43f4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c8dc6683ffejhnhcllQPOs3Oi",
+        "model": "qwen3.6-plus-free"
+      },
+      "human_author": "duncdrum <d.paterson@me.com>"
+    }
+  }
+}
