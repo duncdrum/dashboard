@@ -8,23 +8,29 @@ let $route := request:get-parameter("route","#/launcher")
 
 return
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"/>
     <title>eXist-db Admin Dashboard</title>
+    <link rel="stylesheet" href="resources/styles/webawesome.css"/>
     <link rel="stylesheet" href="resources/styles.css"/>
-    <link rel="stylesheet" href="/node_modules/@awesome.me/webawesome/dist/styles/webawesome.css"/>
-    
-    <!-- Shoelace and Lit for main dashboard shell -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "./resources/scripts/lit/index.js",
+          "lit/": "./resources/scripts/lit/",
+          "@awesome.me/webawesome/": "./resources/scripts/@awesome.me/webawesome/",
+          "@existdb/repo-elements": "./resources/scripts/@existdb/repo-elements/dist/repo-elements.js"
+        }
+      }
+    </script>
+    <script type="module" src="resources/scripts/dist/existdb-launcher-app.js"></script>
+    <script type="module" src="resources/scripts/dist/existdb-login.js"></script>
+    <script type="module" src="resources/scripts/dist/existdb-packagemanager.js"></script>
+    <script type="module" src="resources/scripts/dist/usermanager.js"></script>
+    <script type="module" src="resources/scripts/dist/existdb-backup-app.js"></script>
     <script type="module" src="existdb-dashboard.js"></script>
-    
-    <!-- Polymer loader for sub-components (to be migrated separately) -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="bower_components/existdb-launcher/dependencies.html"/>
-    <link rel="import" href="bower_components/existdb-packagemanager/dependencies.html"/>
-    <link rel="import" href="bower_components/existdb-usermanager/dependencies.html"/>
-    <link rel="import" href="bower_components/existdb-backup/dependencies.html"/>
 </head>
 <body>
     <existdb-dashboard path="{$route}"></existdb-dashboard>

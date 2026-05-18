@@ -3,8 +3,7 @@
 import gulp from 'gulp';
 import { createClient } from '@existdb/gulp-exist';
 import zip from 'gulp-zip';
-import { promises as fs, existsSync } from 'fs';
-import { readFileSync } from 'fs';
+import { promises as fs, existsSync, readFileSync } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
@@ -15,6 +14,7 @@ const exClient = createClient({
   host: 'localhost',
   port: '8080',
   path: '/exist/xmlrpc',
+  secure: false,
   basic_auth: { user: 'admin', pass: '' },
 });
 
@@ -50,7 +50,80 @@ gulp.task('clean', async function () {
   await fs.rm('build', { recursive: true, force: true });
 });
 
-// odd files //
+function copyPackageDist(packagePath, distSubpath = 'dist') {
+  return gulp
+    .src(`node_modules/${packagePath}/${distSubpath}/**/*`, {
+      base: `node_modules/${packagePath}/${distSubpath}`,
+      encoding: false,
+    })
+    .pipe(gulp.dest('build/resources/scripts/dist'));
+}
+
+gulp.task(
+  'copy:components',
+  gulp.parallel(
+    () => copyPackageDist('existdb-launcher'),
+    () => copyPackageDist('existdb-packagemanager'),
+    () => copyPackageDist('@existdb/usermanager'),
+    () => copyPackageDist('existdb-backup'),
+    function copyRepoElements() {
+      return gulp
+        .src('node_modules/@existdb/repo-elements/dist/**/*', {
+          base: 'node_modules/@existdb/repo-elements/dist',
+          encoding: false,
+        })
+        .pipe(gulp.dest('build/resources/scripts/@existdb/repo-elements/dist'));
+    }
+  )
+);
+
+gulp.task('copy:deps', function () {
+  return gulp
+    .src(
+      [
+        'node_modules/lit/**/*.js',
+        'node_modules/@lit/**/*.js',
+        'node_modules/lit-html/**/*.js',
+        'node_modules/lit-element/**/*.js',
+        'node_modules/@awesome.me/webawesome/dist/**/*',
+      ],
+      { base: 'node_modules' }
+    )
+    .pipe(gulp.dest('build/resources/scripts'));
+});
+
+gulp.task('copy:project', function () {
+  const projectFiles = [
+    '*.xml',
+    '*.xql',
+    '*.html',
+    '*.js',
+    '!gulpfile.js',
+    '!prettier.config.js',
+    '!cypress.config.js',
+    'icon.png',
+    'icon.svg',
+    'modules/**/*',
+    'resources/**/*',
+    'src/**/*.js',
+    'demo/*.html',
+    'cypress/**/*',
+  ];
+
+  if (existsSync('templates')) {
+    projectFiles.push('templates/**/*');
+  }
+  if (existsSync('transforms')) {
+    projectFiles.push('transforms/**/*');
+  }
+
+  return gulp.src(projectFiles, { base: '.' }).pipe(gulp.dest('build'));
+});
+
+gulp.task(
+  'build',
+  gulp.series('clean', 'copy:components', 'copy:deps', 'copy:project')
+);
 
 const oddPath = 'resources/odd/**/*';
 
@@ -65,15 +138,10 @@ gulp.task('odd:watch', function () {
   gulp.watch(oddPath, gulp.series('odd:deploy'));
 });
 
-// files in project root //
-
 const componentPaths = [
   '*.html',
-  '!index.html',
-  '*.js',
-  '!gulpfile.js',
-  'node_modules/@awesome.me/webawesome/dist/**/*.js',
-  'bower_components/**/*.js',
+  'existdb-dashboard.js',
+  'src/**/*.js',
 ];
 
 gulp.task('deploy:components', function () {
@@ -83,7 +151,7 @@ gulp.task('deploy:components', function () {
     .pipe(exClient.dest(html5TargetConfiguration));
 });
 
-const otherPaths = ['*.html', '*.xql', 'resources/**/*', 'modules/**/*', 'demo/*.html'];
+const otherPaths = ['*.xql', 'resources/**/*', 'modules/**/*'];
 
 if (existsSync('templates')) {
   otherPaths.push('templates/**/*');
@@ -101,43 +169,20 @@ gulp.task('deploy:other', function () {
 
 gulp.task('deploy', gulp.parallel('deploy:other', 'deploy:components'));
 
-// XAR creation //
-
-const buildFiles = [
-  '*.xml',
-  '*.xql',
-  '*.html',
-  '*.js',
-  '!gulpfile.js',
-  'icon.png',
-  'icon.svg',
-  'modules/**/*',
-  'resources/**/*',
-  'demo/*.html',
-];
-
-if (existsSync('templates')) {
-  buildFiles.push('templates/**/*');
-}
-if (existsSync('transforms')) {
-  buildFiles.push('transforms/**/*');
-}
-
-gulp.task('xar', function () {
-  return gulp.src(buildFiles, { base: '.' }).pipe(zip(xarName)).pipe(gulp.dest('build'));
-});
+gulp.task('xar', gulp.series('build', function () {
+  return gulp.src('build/**/*', { base: 'build' }).pipe(zip(xarName)).pipe(gulp.dest('build'));
+}));
 
 gulp.task(
   'install',
   gulp.series('xar', function () {
-    return gulp.src(`build/${xarName}`).pipe(exClient.install());
+    return gulp.src(`build/${xarName}`, { encoding: false }).pipe(exClient.install());
   })
 );
 
 gulp.task('watch', function () {
   gulp.watch(otherPaths, gulp.series('deploy:other'));
-  gulp.watch('*.html', gulp.series('deploy:components'));
-  gulp.watch('*.js', gulp.series('deploy:components'));
+  gulp.watch(componentPaths, gulp.series('deploy:components'));
 });
 
 gulp.task('default', gulp.series('watch'));

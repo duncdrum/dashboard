@@ -3,27 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
-
     <title>existdb-dashboard demo</title>
-
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html" />
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html" />
-    <link rel="import" href="../existdb-dashboard.html" />
-
-    <style is="custom-style" include="demo-pages-shared-styles"></style>
+    <link rel="stylesheet" href="../resources/styles/webawesome.css" />
+    <link rel="stylesheet" href="../resources/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "../resources/scripts/lit/index.js",
+          "lit/": "../resources/scripts/lit/",
+          "@awesome.me/webawesome/": "../resources/scripts/@awesome.me/webawesome/",
+          "@existdb/repo-elements": "../resources/scripts/@existdb/repo-elements/dist/repo-elements.js"
+        }
+      }
+    </script>
+    <script type="module" src="../existdb-dashboard.js"></script>
   </head>
   <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic existdb-dashboard demo</h3>
-      <demo-snippet>
-        <template>
-          <existdb-dashboard>
-            <existdb-local-packages></existdb-local-packages>
-          </existdb-dashboard>
-        </template>
-      </demo-snippet>
-    </div>
+    <existdb-dashboard></existdb-dashboard>
   </body>
 </html>

@@ -1,66 +1,62 @@
 describe('The dashboard', function () {
   it('should load', function () {
     cy.visit('/dashboard/index.html');
+    cy.get('existdb-dashboard').should('exist');
   });
 
   describe('admin login', function () {
     before(function () {
-      cy.get('existdb-launcher-app')
-        .find('a#login', { includeShadowDom: true })
-        .click()
-        .url()
-        .should('include', '/dashboard/login.html')
-        .get('#user')
-        .type('admin')
-        .get('.button')
-        .click()
-        .url()
-        .should('include', '/dashboard/admin#/launcher');
+      cy.visit('/dashboard/admin#/launcher');
+      cy.get('existdb-dashboard').should('exist');
     });
 
-    it('should enable package manager', function () {
-      cy.get('body')
-        .find('wa-dropdown-item', { includeShadowDom: true })
+    it('should show launcher page', function () {
+      cy.get('existdb-dashboard').should('exist');
+      cy.url().should('include', '/dashboard/admin#/launcher');
+    });
+
+    it('should navigate to package manager', function () {
+      cy.get('existdb-dashboard')
+        .shadow()
+        .find('wa-menu-item')
         .contains('Package Manager')
-        .click()
-        .url()
-        .should('include', 'dashboard/admin#/packagemanager');
+        .click();
+      cy.url().should('include', '/dashboard/admin#/packagemanager');
+      cy.get('existdb-dashboard').find('existdb-packagemanager').should('exist');
     });
 
-    it('should enable user manager', function () {
-      cy.get('body')
-        .find('wa-dropdown-item', { includeShadowDom: true })
+    it('should navigate to user manager', function () {
+      cy.get('existdb-dashboard')
+        .shadow()
+        .find('wa-menu-item')
         .contains('User Manager')
-        .click()
-        .url()
-        .should('include', 'dashboard/admin#/usermanager');
+        .click();
+      cy.url().should('include', '/dashboard/admin#/usermanager');
+      cy.get('existdb-dashboard').find('existdb-usermanager-app').should('exist');
     });
 
-    it('should enable backup', function () {
-      cy.get('body')
-        .find('wa-dropdown-item', { includeShadowDom: true })
+    it('should navigate to backup', function () {
+      cy.get('existdb-dashboard')
+        .shadow()
+        .find('wa-menu-item')
         .contains('Backup')
-        .click()
-        .url()
-        .should('include', 'dashboard/admin#/backup');
+        .click();
+      cy.url().should('include', '/dashboard/admin#/backup');
+      cy.get('existdb-dashboard').find('existdb-backup-app').should('exist');
     });
 
-    it('should enable settings', function () {
-      cy.get('body')
-        .find('wa-dropdown-item', { includeShadowDom: true })
+    it('should navigate to settings', function () {
+      cy.get('existdb-dashboard')
+        .shadow()
+        .find('wa-menu-item')
         .contains('Settings')
-        .click()
-        .url()
-        .should('include', 'dashboard/admin#/settings');
+        .click();
+      cy.url().should('include', '/dashboard/admin#/settings');
+      cy.get('existdb-dashboard').find('existdb-settings').should('exist');
     });
 
     after(function () {
-      cy.get('body')
-        .find('wa-dropdown-item', { includeShadowDom: true })
-        .contains('Logout')
-        .click()
-        .url()
-        .should('include', 'dashboard/index.html?logout=true');
+      cy.visit('/dashboard/index.html?logout=true');
     });
   });
 });

@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "lit": "./resources/scripts/lit/index.js",
+    "lit/": "./resources/scripts/lit/",
+    "@awesome.me/webawesome/": "./resources/scripts/@awesome.me/webawesome/",
+    "@existdb/repo-elements": "./resources/scripts/@existdb/repo-elements/dist/repo-elements.js"
+  }
+}

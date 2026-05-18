@@ -1,5 +1,6 @@
 node_modules/
 bower_components/
+vendor/
 build/
 .idea/
 .zed/
@@ -7,3 +8,4 @@ build/
 cypress/screenshots/
 cypress/videos/
 *.xar
+polymer-*.tgz

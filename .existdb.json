@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "localhost": {
+      "server": "http://localhost:8080",
+      "root": "/db/apps/dashboard",
+      "user": "admin",
+      "password": ""
+    }
+  },
+  "package": {
+    "ns": "http://exist-db.org/apps/dashboard"
+  }
+}

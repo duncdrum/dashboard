@@ -1,81 +1,59 @@
 # eXist-db Admin Dashboard
 
-Modern admin dashboard for eXist-db built with Lit and Shoelace.
+Admin dashboard for eXist-db built with **Lit 3** and **Web Awesome**, embedding migrated sub-apps from npm.
 
 ## Requirements
 
 - Node.js 24+
 - npm 11+
+- Built Lit component packages (sibling repos or published npm versions)
 
 ## Development
+
+Install dependencies (links sibling component repos via `file:..`):
 
 ```bash
 npm install
 npm run watch
 ```
 
+Component `dist/` bundles are built automatically before `xar` via `scripts/ensure-component-builds.mjs`.
+
 ## Building
 
 ```bash
-npm run build
 npm run xar
 ```
 
-The XAR file will be created in the `build/` directory and can be installed via eXist-db's Package Manager.
+Produces `build/dashboard-<version>.xar` for eXist-db Package Manager.
 
 ## Testing
 
 ```bash
-npm run cypress              # Run tests in headless mode
-npm run cypress:open  # Open Cypress GUI
+npm run cypress
+npm run cypress:open
 ```
+
+CI builds the XAR, starts eXist-db in Docker, and runs Cypress against `/exist/apps/dashboard/`.
 
 ## Architecture
 
-Built with modern web technologies:
+- **existdb-dashboard** — Lit shell (drawer navigation, hash routing)
+- **Sub-apps** (npm) — launcher, packagemanager, usermanager, backup, `@existdb/repo-elements`
+- **Gulp 5** — copies `node_modules/*/dist` and Lit/WA into `resources/scripts/` for the XAR
+- **No Bower / Polymer** — legacy `vendor/` and HTML imports removed
 
-- **Lit 3** - Lightweight Web Components framework
-- **Shoelace** - Beautiful, accessible UI component library
-- **Cypress 15** - End-to-end testing with native Shadow DOM support
-- **Gulp 5** - Build automation and eXist-db deployment
+## Entry points
 
-## Browser Support
+| File | Purpose |
+|------|---------|
+| `index.html` | Public launcher + login |
+| `admin.xql` | Authenticated admin UI with full dashboard |
+| `guest.html` | Launcher-only guest view |
 
-Targets modern browsers only (no polyfills required):
+## Browser support
 
-- Chrome 90+
-- Firefox 90+
-- Safari 14+
-- Edge 90+
-
-## Features
-
-- Modular Web Components architecture
-- Responsive sidebar layout following Material Design
-- Package management (install, update, remove applications)
-- User and group management
-- Backup and restore functionality
-- Application launcher
-- Settings and configuration panel
-
-## Migration from v1
-
-This is a complete rewrite from the Polymer 2 + Bower stack. Key changes:
-
-- **Polymer → Lit**: Modern, faster Web Components framework
-- **Bower → npm**: Standard package management
-- **Paper/Iron elements → Shoelace**: Accessible, modern UI components
-- **jQuery → Native DOM**: Removed all jQuery dependencies
-- **Ant → npm scripts**: Simplified build process
-- **Custom Shadow DOM helpers → Cypress native**: Better testing support
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests: `npm run cypress`
-5. Submit a pull request
+Modern browsers (Chrome 90+, Firefox 90+, Safari 14+, Edge 90+).
 
 ## License
 

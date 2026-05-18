@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import './src/existdb-settings.js';
 import '@awesome.me/webawesome/dist/components/drawer/drawer.js';
 import '@awesome.me/webawesome/dist/components/menu/menu.js';
 import '@awesome.me/webawesome/dist/components/menu-item/menu-item.js';
@@ -7,23 +8,21 @@ import '@awesome.me/webawesome/dist/components/icon-button/icon-button.js';
 import '@awesome.me/webawesome/dist/components/spinner/spinner.js';
 import '@awesome.me/webawesome/dist/components/card/card.js';
 import '@awesome.me/webawesome/dist/components/alert/alert.js';
+import '@awesome.me/webawesome/dist/components/button/button.js';
 import { setBasePath } from '@awesome.me/webawesome/dist/webawesome.js';
 
-setBasePath('/node_modules/@awesome.me/webawesome/dist/');
+setBasePath('resources/scripts/@awesome.me/webawesome/dist/');
 
 class ExistdbDashboard extends LitElement {
   static properties = {
     path: { type: String },
     currentPage: { state: true },
-    componentLoaded: { state: true },
   };
 
   constructor() {
     super();
     this.path = '';
     this.currentPage = 'launcher';
-    this.componentLoaded = {};
-    this._loadComponent('launcher');
   }
 
   static styles = css`
@@ -91,13 +90,7 @@ class ExistdbDashboard extends LitElement {
     .content-area {
       height: calc(100vh - 60px);
       overflow: auto;
-    }
-
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
+      padding: 2rem;
     }
 
     wa-drawer::part(panel) {
@@ -125,20 +118,12 @@ class ExistdbDashboard extends LitElement {
     const page = hash.replace('/', '');
     if (page && page !== this.currentPage) {
       this.currentPage = page;
-      this._loadComponent(page);
     }
-  }
-
-  _loadComponent(page) {
-    // Sub-components are loaded via HTML imports in admin.xql
-    // Mark them as loaded immediately
-    this.componentLoaded = { ...this.componentLoaded, [page]: true };
   }
 
   _navigateTo(page) {
     this.currentPage = page;
     window.location.hash = `/${page}`;
-    this._loadComponent(page);
     this.shadowRoot.querySelector('wa-drawer').hide();
   }
 
@@ -194,14 +179,6 @@ class ExistdbDashboard extends LitElement {
   }
 
   _renderPage() {
-    if (!this.componentLoaded[this.currentPage]) {
-      return html`
-        <div class="loading">
-          <wa-spinner style="font-size: 3rem;"></wa-spinner>
-        </div>
-      `;
-    }
-
     switch (this.currentPage) {
       case 'launcher':
         return html`
