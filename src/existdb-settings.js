@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit'
-import '@awesome.me/webawesome/dist/components/card/card.js'
+import { LitElement, html, css } from 'lit';
+import '@awesome.me/webawesome/dist/components/card/card.js';
 
 export class ExistdbSettings extends LitElement {
   static styles = css`
@@ -7,9 +7,9 @@ export class ExistdbSettings extends LitElement {
       display: block;
       max-width: 48rem;
     }
-  `
+  `;
 
-  render () {
+  render() {
     return html`
       <wa-card>
         <div slot="header">Settings</div>
@@ -19,8 +19,8 @@ export class ExistdbSettings extends LitElement {
           <code>conf.xml</code> on the server.
         </p>
       </wa-card>
-    `
+    `;
   }
 }
 
-customElements.define('existdb-settings', ExistdbSettings)
+customElements.define('existdb-settings', ExistdbSettings);

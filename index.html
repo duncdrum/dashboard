@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
+    />
     <title>eXist-db Dashboard</title>
     <link rel="stylesheet" href="resources/styles/webawesome.css" />
     <link rel="stylesheet" href="resources/styles.css" />
@@ -16,11 +19,12 @@
         }
       }
     </script>
-    <script type="module" src="resources/scripts/dist/existdb-launcher-app.js"></script>
-    <script type="module" src="resources/scripts/dist/existdb-login.js"></script>
+    <script type="module" src="resources/scripts/dist/load-public.js"></script>
   </head>
   <body>
-    <existdb-launcher-app ignores='["packagemanager","packageservice","launcher","usermanager","dashboard"]'>
+    <existdb-launcher-app
+      ignores='["packagemanager","packageservice","launcher","usermanager","dashboard"]'
+    >
       <existdb-login
         login-label="Login"
         logout-label="Logout"

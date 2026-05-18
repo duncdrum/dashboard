@@ -1,22 +1,14 @@
 import { LitElement, html, css } from 'lit';
-import './src/existdb-settings.js';
+import './existdb-settings.js';
 import '@awesome.me/webawesome/dist/components/drawer/drawer.js';
-import '@awesome.me/webawesome/dist/components/menu/menu.js';
-import '@awesome.me/webawesome/dist/components/menu-item/menu-item.js';
 import '@awesome.me/webawesome/dist/components/icon/icon.js';
-import '@awesome.me/webawesome/dist/components/icon-button/icon-button.js';
-import '@awesome.me/webawesome/dist/components/spinner/spinner.js';
 import '@awesome.me/webawesome/dist/components/card/card.js';
-import '@awesome.me/webawesome/dist/components/alert/alert.js';
 import '@awesome.me/webawesome/dist/components/button/button.js';
-import { setBasePath } from '@awesome.me/webawesome/dist/webawesome.js';
 
-setBasePath('resources/scripts/@awesome.me/webawesome/dist/');
-
-class ExistdbDashboard extends LitElement {
+export class ExistdbDashboard extends LitElement {
   static properties = {
     path: { type: String },
-    currentPage: { state: true },
+    currentPage: { state: true }
   };
 
   constructor() {
@@ -69,22 +61,40 @@ class ExistdbDashboard extends LitElement {
       color: var(--wa-color-neutral-600);
     }
 
-    wa-menu {
-      --wa-spacing-medium: 0;
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
     }
 
-    wa-menu-item {
-      --padding: 0.75rem 1rem;
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      background: transparent;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      color: inherit;
     }
 
-    wa-menu-item::part(base) {
-      padding: var(--padding);
+    .nav-item:hover,
+    .nav-item:focus-visible {
+      background: var(--wa-color-neutral-100);
+    }
+
+    .nav-item[aria-current='page'] {
+      background: var(--wa-color-brand-50, #e3f2fd);
     }
 
     .menu-icon {
       width: 36px;
       height: 36px;
-      margin-right: 8px;
+      flex-shrink: 0;
     }
 
     .content-area {
@@ -104,13 +114,14 @@ class ExistdbDashboard extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('hashchange', () => this._handleRouteChange());
+    this._onHashChange = () => this._handleRouteChange();
+    window.addEventListener('hashchange', this._onHashChange);
     this._handleRouteChange();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('hashchange', () => this._handleRouteChange());
+    window.removeEventListener('hashchange', this._onHashChange);
   }
 
   _handleRouteChange() {
@@ -127,8 +138,18 @@ class ExistdbDashboard extends LitElement {
     this.shadowRoot.querySelector('wa-drawer').hide();
   }
 
-  _logout() {
-    window.location.href = 'index.html?logout=true';
+  _navItem(page, label, content) {
+    const current = this.currentPage === page ? 'page' : undefined;
+    return html`
+      <button
+        type="button"
+        class="nav-item"
+        aria-current=${current}
+        @click=${() => this._navigateTo(page)}
+      >
+        ${content} ${label}
+      </button>
+    `;
   }
 
   render() {
@@ -139,32 +160,35 @@ class ExistdbDashboard extends LitElement {
           <div class="subitem">Dashboard</div>
         </div>
 
-        <wa-menu>
-          <wa-menu-item @click=${() => this._navigateTo('launcher')}>
-            <img slot="start" class="menu-icon" src="resources/images/launcher.svg" alt="" />
-            Launcher
-          </wa-menu-item>
-          <wa-menu-item @click=${() => this._navigateTo('packagemanager')}>
-            <wa-icon slot="start" name="grid-fill"></wa-icon>
-            Package Manager
-          </wa-menu-item>
-          <wa-menu-item @click=${() => this._navigateTo('usermanager')}>
-            <wa-icon slot="start" name="people-fill"></wa-icon>
-            User Manager
-          </wa-menu-item>
-          <wa-menu-item @click=${() => this._navigateTo('backup')}>
-            <wa-icon slot="start" name="arrow-clockwise"></wa-icon>
-            Backup
-          </wa-menu-item>
-          <wa-menu-item @click=${() => this._navigateTo('settings')}>
-            <wa-icon slot="start" name="gear-fill"></wa-icon>
-            Settings
-          </wa-menu-item>
-          <wa-menu-item @click=${this._logout}>
-            <img slot="start" class="menu-icon" src="resources/images/logout.svg" alt="" />
+        <nav class="side-nav">
+          ${this._navItem(
+            'launcher',
+            'Launcher',
+            html`<img class="menu-icon" src="resources/images/launcher.svg" alt="" />`
+          )}
+          ${this._navItem(
+            'packagemanager',
+            'Package Manager',
+            html`<wa-icon name="grid-fill"></wa-icon>`
+          )}
+          ${this._navItem(
+            'usermanager',
+            'User Manager',
+            html`<wa-icon name="people-fill"></wa-icon>`
+          )}
+          ${this._navItem('backup', 'Backup', html`<wa-icon name="arrow-clockwise"></wa-icon>`)}
+          ${this._navItem('settings', 'Settings', html`<wa-icon name="gear-fill"></wa-icon>`)}
+          <button
+            type="button"
+            class="nav-item"
+            @click=${() => {
+              globalThis.location.href = 'index.html?logout=true';
+            }}
+          >
+            <img class="menu-icon" src="resources/images/logout.svg" alt="" />
             Logout
-          </wa-menu-item>
-        </wa-menu>
+          </button>
+        </nav>
       </wa-drawer>
 
       <div class="header">

@@ -2,9 +2,16 @@ node_modules/
 bower_components/
 vendor/
 build/
+dist/
+resources/scripts/dist/
+resources/scripts/lit/
+resources/scripts/@awesome.me/
+resources/scripts/@existdb/
 .idea/
 .zed/
 .cursor/
+test/cypress/screenshots/
+test/cypress/videos/
 cypress/screenshots/
 cypress/videos/
 *.xar

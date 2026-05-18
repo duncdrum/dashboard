@@ -25,12 +25,7 @@ return
         }
       }
     </script>
-    <script type="module" src="resources/scripts/dist/existdb-launcher-app.js"></script>
-    <script type="module" src="resources/scripts/dist/existdb-login.js"></script>
-    <script type="module" src="resources/scripts/dist/existdb-packagemanager.js"></script>
-    <script type="module" src="resources/scripts/dist/usermanager.js"></script>
-    <script type="module" src="resources/scripts/dist/existdb-backup-app.js"></script>
-    <script type="module" src="existdb-dashboard.js"></script>
+    <script type="module" src="resources/scripts/dist/load-admin.js"></script>
 </head>
 <body>
     <existdb-dashboard path="{$route}"></existdb-dashboard>

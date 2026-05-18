@@ -1,34 +1,59 @@
-name: exist-db CI
+name: Build and Test
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: [master, main]
+  push:
+    branches: [master, main]
+  workflow_dispatch:
 
 jobs:
-  build:
+  component-tests:
+    name: Cypress Component Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run build:production
+      - run: npm run cy:run:ct
+
+  lint-build:
+    name: Lint and XAR build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build:production
+      - run: npx gulp xar
+
+  e2e-exist:
+    name: Cypress E2E on eXist-db
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         exist-version: [release, latest]
-        node-version: ['24']
-
     steps:
       - uses: actions/checkout@v5
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Check formatting
-        run: npm run format:check
-
-      - name: Build frontend
-        run: npm run xar
-
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run build:production
+      - run: npx gulp xar
       - name: Start eXist-db
         run: |
           docker run --rm --name exist \
@@ -36,20 +61,39 @@ jobs:
             --publish 8080:8080 \
             --detach existdb/existdb:${{ matrix.exist-version }}
           timeout 90 sh -c 'until nc -z localhost 8080; do sleep 3; done'
-
-      - name: Run Cypress tests
-        run: npx cypress run
-
-      - name: Upload screenshots (on failure)
-        uses: actions/upload-artifact@v5
+      - run: npm run cy:run:e2e
+      - uses: actions/upload-artifact@v5
         if: failure()
         with:
-          name: cypress-screenshots-${{ matrix.exist-version }}-${{ matrix.node-version }}
-          path: cypress/screenshots
-
-      - name: Upload videos
-        uses: actions/upload-artifact@v5
+          name: cypress-screenshots-${{ matrix.exist-version }}
+          path: test/cypress/screenshots
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
-          name: cypress-videos-${{ matrix.exist-version }}-${{ matrix.node-version }}
-          path: cypress/videos
+          name: cypress-videos-${{ matrix.exist-version }}
+          path: test/cypress/videos
+
+  release:
+    name: Release
+    needs: [component-tests, lint-build]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

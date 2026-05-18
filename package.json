@@ -2,32 +2,50 @@
   "name": "existdb-dashboard",
   "version": "2.0.9",
   "description": "Modern eXist-db Admin Dashboard",
-  "license": "ISC",
+  "type": "module",
+  "license": "LGPL-2.1-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eXist-db/dashboard.git"
   },
-  "author": "",
-  "main": "index.html",
-  "type": "module",
+  "main": "dist/dashboard.js",
+  "module": "dist/dashboard.js",
+  "exports": {
+    ".": "./dist/dashboard.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "resources"
+  ],
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=24"
   },
   "scripts": {
-    "prebuild": "node scripts/ensure-component-builds.mjs",
-    "prexar": "node scripts/ensure-component-builds.mjs",
-    "build": "gulp clean && gulp deploy",
-    "build:production": "gulp clean && NODE_ENV=production gulp deploy",
-    "clean": "rm -rf build",
-    "cypress": "cypress run",
-    "cypress:open": "cypress open",
-    "deploy": "gulp deploy",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "prebuild": "node scripts/sync-pkg-version.mjs && node scripts/ensure-component-builds.mjs",
+    "prebuild:production": "node scripts/sync-pkg-version.mjs && node scripts/ensure-component-builds.mjs",
+    "prexar": "node scripts/sync-pkg-version.mjs && node scripts/ensure-component-builds.mjs",
+    "predev": "node scripts/ensure-component-builds.mjs && npm run build && node scripts/link-dev-dist.mjs",
+    "start": "vite",
+    "dev": "vite --no-open",
+    "build": "rollup -c rollup.config.mjs",
+    "build:production": "rollup -c rollup.config.mjs --environment BUILD:production",
+    "xar": "gulp xar",
     "install:xar": "gulp install",
-    "start": "gulp",
+    "deploy": "gulp deploy",
     "watch": "gulp watch",
-    "xar": "gulp xar"
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "lint:eslint": "eslint .",
+    "format:eslint": "eslint . --fix",
+    "lint:prettier": "prettier \"**/*.{js,mjs,json,html,md}\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.{js,mjs,json,html,md}\" --write --ignore-path .gitignore",
+    "cy:open": "concurrently --kill-others --success first \"vite --no-open\" \"cypress open\"",
+    "cy:run:ct": "CYPRESS=1 cypress run --component",
+    "cy:run:e2e": "cypress run --e2e",
+    "cypress": "npm run cy:run:e2e",
+    "cypress:open": "cypress open --e2e",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@awesome.me/webawesome": "^3.7.0",
@@ -40,15 +58,32 @@
   },
   "devDependencies": {
     "@existdb/gulp-exist": "^6.0.0",
-    "chai": "^6.2.2",
+    "@open-wc/eslint-config": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.2",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "concurrently": "^9.2.1",
     "cypress": "^15.15.0",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^6.3.1",
     "fast-xml-parser": "^5.8.0",
     "gulp": "^5.0.0",
-    "gulp-rename": "^2.1.0",
-    "gulp-watch": "^5.0.1",
     "gulp-zip": "^6.1.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-package": "2.0.0",
-    "prettier-plugin-xquery": "1.6.0"
+    "prettier": "^3.8.3",
+    "prettier-plugin-xquery": "1.6.0",
+    "rollup": "^4.60.2",
+    "semantic-release": "^25.0.3",
+    "vite": "^8.0.10"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 100,
+    "plugins": [
+      "prettier-plugin-xquery"
+    ]
   }
 }
